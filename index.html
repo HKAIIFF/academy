@@ -1,0 +1,2401 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HKAIFA - 香港AI電影學院</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@700;800&family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #3498db;
+            --secondary: #8e44ad;
+            --accent: #00ff9d;
+            --education: #e74c3c;
+            --innovation: #f39c12;
+        }
+        
+        body {
+            font-family: 'Noto Sans TC', 'Inter', sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(52, 152, 219, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(142, 68, 173, 0.1) 0%, transparent 20%);
+        }
+        
+        .logo-font {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 800;
+            font-size: 2.5rem;
+            letter-spacing: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+            text-shadow: 0 0 15px rgba(0, 255, 157, 0.3);
+            animation: logoGlow 3s ease-in-out infinite alternate;
+        }
+        
+        @keyframes logoGlow {
+            0% { text-shadow: 0 0 10px rgba(0, 255, 157, 0.3); }
+            100% { text-shadow: 0 0 25px rgba(0, 255, 157, 0.6), 0 0 35px rgba(52, 152, 219, 0.4); }
+        }
+        
+        .logo-sub {
+            font-family: 'Noto Sans TC', sans-serif;
+            font-weight: 700;
+            font-size: 0.6rem;
+            letter-spacing: 2px;
+            color: var(--accent);
+            margin-top: -8px;
+            text-align: center;
+            opacity: 0.8;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .education-gradient {
+            background: linear-gradient(135deg, var(--education), var(--innovation));
+        }
+        
+        .card {
+            background-color: rgba(26, 32, 44, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 255, 157, 0.2);
+            border-color: rgba(0, 255, 157, 0.3);
+        }
+        
+        .navbar {
+            background-color: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 157, 0.1);
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        .btn-education {
+            background: linear-gradient(135deg, var(--education), var(--innovation));
+            transition: all 0.3s ease;
+            border: none;
+            font-weight: 600;
+        }
+        
+        .btn-education:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            border: 1px solid var(--accent);
+            color: var(--accent);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(0, 255, 157, 0.1);
+            transform: translateY(-3px);
+        }
+        
+        .hero {
+            position: relative;
+            overflow: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding-top: 80px;
+        }
+        
+        .hero:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 100%);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.7;
+            animation: bgPan 30s infinite linear;
+        }
+        
+        @keyframes bgPan {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        .animate-slide-right {
+            animation: slideRight 0.8s ease-in-out forwards;
+            opacity: 0;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes slideUp {
+            from { transform: translateY(50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        
+        @keyframes slideRight {
+            from { transform: translateX(-50px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        
+        .cyber-border {
+            position: relative;
+        }
+        
+        .cyber-border:after {
+            content: '';
+            position: absolute;
+            top: -3px;
+            left: -3px;
+            right: -3px;
+            bottom: -3px;
+            background: linear-gradient(45deg, transparent 30%, var(--accent) 45%, var(--secondary) 55%, transparent 70%);
+            background-size: 200% 200%;
+            animation: borderGlow 5s linear infinite;
+            z-index: -1;
+            border-radius: 20px;
+        }
+        
+        @keyframes borderGlow {
+            0% { background-position: 0% 0%; }
+            50% { background-position: 100% 100%; }
+            100% { background-position: 0% 0%; }
+        }
+        
+        .ai-element {
+            position: absolute;
+            background-color: rgba(52, 152, 219, 0.1);
+            border: 1px solid rgba(52, 152, 219, 0.3);
+            backdrop-filter: blur(5px);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 12px;
+            color: var(--accent);
+            z-index: 3;
+            pointer-events: none;
+            box-shadow: 0 0 15px rgba(0, 255, 157, 0.1);
+        }
+        
+        .data-stream {
+            position: absolute;
+            height: 100px;
+            width: 2px;
+            background: linear-gradient(to bottom, transparent, var(--accent), var(--secondary), transparent);
+            z-index: 0;
+            animation: dataStream 2s linear infinite;
+            opacity: 0.3;
+        }
+        
+        @keyframes dataStream {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
+        }
+        
+        .language-selector {
+            position: relative;
+            display: inline-block;
+            margin-right: 20px;
+        }
+        
+        .language-dropdown {
+            display: none;
+            position: absolute;
+            background-color: rgba(26, 32, 44, 0.95);
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 100;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1);
+            top: 40px;
+            right: 0;
+        }
+        
+        .language-selector:hover .language-dropdown {
+            display: block;
+        }
+        
+        .language-dropdown a {
+            color: white;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        
+        .language-dropdown a:hover {
+            background-color: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-dropdown img {
+            width: 24px;
+            margin-right: 10px;
+        }
+        
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 2rem;
+        }
+        
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+        
+        .section-title.center:after {
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .stats-card {
+            text-align: center;
+            padding: 25px;
+            border-radius: 16px;
+            background: rgba(26, 32, 44, 0.5);
+            border: 1px solid rgba(0, 255, 157, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(26, 32, 44, 0.7);
+        }
+        
+        .stats-card i {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+        
+        .stats-card .number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, var(--primary), var(--accent), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .course-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid var(--accent);
+        }
+        
+        .course-card:hover {
+            border-left-color: var(--education);
+            background: rgba(26, 32, 44, 0.8);
+        }
+        
+        .certification-level {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+        
+        .level-basic {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--primary);
+        }
+        
+        .level-professional {
+            background: rgba(142, 68, 173, 0.2);
+            color: var(--secondary);
+        }
+        
+        .level-advanced {
+            background: rgba(231, 76, 60, 0.2);
+            color: var(--education);
+        }
+        
+        .level-expert {
+            background: rgba(243, 156, 18, 0.2);
+            color: var(--innovation);
+        }
+        
+        .token-feature {
+            background: rgba(26, 32, 44, 0.6);
+            border: 1px solid rgba(0, 255, 157, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .token-feature:hover {
+            border-color: var(--accent);
+            transform: translateX(10px);
+        }
+        
+        .ecosystem-component {
+            background: rgba(26, 32, 44, 0.6);
+            border-radius: 16px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .ecosystem-component:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 255, 157, 0.15);
+            border-color: var(--accent);
+        }
+        
+        .pricing-card {
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+        
+        .pricing-card.featured {
+            border-color: var(--accent);
+            transform: scale(1.05);
+        }
+        
+        .pricing-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-5px);
+        }
+        
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 20px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--accent);
+        }
+        
+        .mobile-nav-item {
+            display: block;
+            padding: 12px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 1.1rem;
+        }
+        
+        .mobile-nav-item:last-child {
+            border-bottom: none;
+        }
+        
+        .language-indicator {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            padding: 8px 12px;
+            border-radius: 30px;
+            background: rgba(255,255,255,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .language-indicator:hover {
+            background: rgba(52, 152, 219, 0.2);
+        }
+        
+        .language-indicator img {
+            width: 24px;
+            margin-right: 8px;
+        }
+        
+        /* 移动端优化 */
+        @media (max-width: 768px) {
+            .desktop-nav {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .logo-font {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                padding-top: 100px; /* 增加顶部内边距，避免导航栏遮挡 */
+                min-height: 90vh; /* 减少最小高度，适应小屏幕 */
+            }
+            
+            .hero h1 {
+                font-size: 2.2rem;
+                line-height: 1.2;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+            
+            .stats-card {
+                padding: 15px;
+            }
+            
+            .stats-card .number {
+                font-size: 1.8rem;
+            }
+            
+            .stats-card i {
+                font-size: 2rem;
+            }
+            
+            /* 调整浮动框位置 */
+            .ai-element {
+                display: none; /* 在移动端隐藏浮动框 */
+            }
+            
+            /* 调整导航栏高度 */
+            .navbar {
+                padding: 12px 0;
+            }
+            
+            /* 调整按钮大小 */
+            .btn-primary, .btn-education, .btn-secondary {
+                padding: 10px 16px;
+                font-size: 0.9rem;
+            }
+            
+            /* 调整课程卡片 */
+            .course-card {
+                padding: 15px;
+            }
+            
+            /* 调整生态系统组件 */
+            .ecosystem-component {
+                padding: 20px;
+            }
+            
+            /* 调整全局中心部分 */
+            .global-center-card {
+                padding: 15px;
+            }
+            
+            /* 调整申请部分 */
+            .apply-card {
+                padding: 20px;
+            }
+        }
+        
+        /* 小屏幕手机优化 */
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 0.9rem;
+            }
+            
+            .stats-card {
+                padding: 12px;
+            }
+            
+            .stats-card .number {
+                font-size: 1.5rem;
+            }
+            
+            .stats-card i {
+                font-size: 1.8rem;
+            }
+            
+            .language-indicator {
+                padding: 6px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .language-indicator img {
+                width: 20px;
+            }
+            
+            .btn-primary, .btn-education, .btn-secondary {
+                padding: 8px 14px;
+                font-size: 0.85rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- AI Elements -->
+    <!-- 将第一个浮动框移动到右下角 -->
+    <div class="ai-element" style="bottom: 200px; right: 15%;">
+        AI_教育: 運行中 <br>
+        課程_生成: 最佳 <br>
+        // 下一代學習
+    </div>
+    
+    <div class="ai-element" style="bottom: 150px; right: 15%;">
+        區塊鏈_教育: 直播 <br>
+        代幣_ACA: 鑄造中 <br>
+        // 知識資產
+    </div>
+    
+    <!-- Data streams -->
+    <div class="data-stream" style="left: 20%; animation-delay: 0s;"></div>
+    <div class="data-stream" style="left: 40%; animation-delay: 0.5s;"></div>
+    <div class="data-stream" style="left: 60%; animation-delay: 1s;"></div>
+    <div class="data-stream" style="left: 80%; animation-delay: 1.5s;"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar fixed w-full z-50 px-4 py-3">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="flex flex-col items-center">
+                <div class="logo-font">HKAIFA</div>
+                <div class="logo-sub">香港AI電影學院</div>
+            </a>
+            <div class="hidden md:flex space-x-8 desktop-nav">
+                <a href="#about" class="hover:text-blue-400 transition">關於我們</a>
+                <a href="#curriculum" class="hover:text-blue-400 transition">課程體系</a>
+                <a href="#ecosystem" class="hover:text-blue-400 transition">教育生態</a>
+                <a href="#tokenomics" class="hover:text-blue-400 transition">代幣經濟</a>
+                <a href="#global" class="hover:text-blue-400 transition">全球中心</a>
+                <a href="#apply" class="hover:text-blue-400 transition">立即申請</a>
+            </div>
+            <div class="flex items-center space-x-4">
+                <!-- Language Selector -->
+                <div class="language-selector">
+                    <div class="language-indicator">
+                        <img src="https://flagcdn.com/w40/hk.png" alt="繁體中文">
+                        <span>繁中</span>
+                        <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                    </div>
+                    <div class="language-dropdown">
+                        <a href="#" data-lang="zh-hant">
+                            <img src="https://flagcdn.com/w40/hk.png" alt="繁體中文">
+                            繁體中文 (香港)
+                        </a>
+                        <a href="#" data-lang="zh-hans">
+                            <img src="https://flagcdn.com/w40/cn.png" alt="簡體中文">
+                            简体中文
+                        </a>
+                        <a href="#" data-lang="en">
+                            <img src="https://flagcdn.com/w40/gb.png" alt="English">
+                            English
+                        </a>
+                        <a href="#" data-lang="ja">
+                            <img src="https://flagcdn.com/w40/jp.png" alt="日本語">
+                            日本語
+                        </a>
+                    </div>
+                </div>
+                
+                <a href="#apply" class="btn-primary px-6 py-2 rounded-full text-sm">立即申請</a>
+                
+                <button class="md:hidden text-white mobile-menu-btn">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-close">
+            <i class="fas fa-times"></i>
+        </div>
+        
+        <div class="mt-12 flex flex-col">
+            <a href="#about" class="mobile-nav-item">關於我們</a>
+            <a href="#curriculum" class="mobile-nav-item">課程體系</a>
+            <a href="#ecosystem" class="mobile-nav-item">教育生態</a>
+            <a href="#tokenomics" class="mobile-nav-item">代幣經濟</a>
+            <a href="#global" class="mobile-nav-item">全球中心</a>
+            <a href="#apply" class="mobile-nav-item">立即申請</a>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-bg"></div>
+        <div class="container mx-auto px-4 hero-content">
+            <div class="max-w-4xl animate-fade-in">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">全球首個 <span class="gradient-text">AI原生</span> 影視教育機構</h1>
+                <p class="text-xl text-gray-300 mb-8">
+                    HKAIFA透過整合尖端AI技術與傳統敘事藝術，革新影視教育。
+                    加入我們，通過創新課程、區塊鏈認證與全球合作網絡，共同塑造電影的未來。
+                </p>
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-12">
+                    <a href="#apply" class="btn-education px-8 py-3 rounded-full font-medium text-center">
+                        開始你的旅程
+                    </a>
+                    <a href="#curriculum" class="btn-secondary px-8 py-3 rounded-full font-medium text-center">
+                        探索課程
+                    </a>
+                </div>
+                
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="stats-card">
+                        <i class="fas fa-graduation-cap"></i>
+                        <div class="number">144</div>
+                        <div class="text-sm">門專業課程</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-certificate"></i>
+                        <div class="number">68</div>
+                        <div class="text-sm">個職業方向</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-globe"></i>
+                        <div class="number">100</div>
+                        <div class="text-sm">個全球中心(2030)</div>
+                    </div>
+                    <div class="stats-card">
+                        <i class="fas fa-users"></i>
+                        <div class="number">5萬+</div>
+                        <div class="text-sm">目標畢業生</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 bg-gray-900 bg-opacity-50" id="about">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">開創影視教育未來</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    隨著全球AI影視市場從2024年的61億美元擴展到2028年預估的200億美元，
+                    HKAIFA致力於解決全球超過18萬AI影視專業人才的嚴重短缺問題。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-20">
+                <div class="animate-slide-right">
+                    <h3 class="text-2xl font-bold mb-6">我們的願景</h3>
+                    <p class="text-gray-300 mb-6">
+                        成為全球領先的AI影視教育機構，打造塑造AI影視產業未來的全球人才培養中心和知識創新樞紐，
+                        同時保持使敘事強大而有意義的基本人文元素。
+                    </p>
+                    <h3 class="text-2xl font-bold mb-6">核心理念</h3>
+                    <p class="text-gray-300 mb-6">
+                        「技術賦能藝術，藝術引領技術」— 我們相信電影製作的未來不在於人工智能取代人類創造力，
+                        而在於人類洞察力與機器能力之間的複雜協作。
+                    </p>
+                </div>
+                
+                <div class="relative animate-fade-in">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="AI Education" class="w-full h-96 object-cover rounded-lg shadow-2xl">
+                    <div class="absolute -bottom-6 -right-6 bg-black bg-opacity-70 rounded-lg p-4 backdrop-blur-sm border border-blue-500">
+                        <div class="text-xs font-mono text-blue-400">
+                            <div>// HKAIFA 使命</div>
+                            <div>培養學生 = <span class="text-green-400">∞</span>;</div>
+                            <div>創新指數 = 0.985;</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full education-gradient flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-lightbulb text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">創新</h4>
+                    <p class="text-gray-300 text-sm">
+                        擁抱技術變革，探索AI與藝術融合的新可能性
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full education-gradient flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-puzzle-piece text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">融合</h4>
+                    <p class="text-gray-300 text-sm">
+                        連接技術與藝術、理論與實踐、教育與產業
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full education-gradient flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-star text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">卓越</h4>
+                    <p class="text-gray-300 text-sm">
+                        在技術能力與藝術品質方面追求最高標準
+                    </p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 rounded-full education-gradient flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-eye text-2xl text-white"></i>
+                    </div>
+                    <h4 class="text-xl font-bold mb-3">透明</h4>
+                    <p class="text-gray-300 text-sm">
+                        通過區塊鏈技術確保清晰的價值歸屬和公平回報
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Curriculum Section -->
+    <section class="py-20" id="curriculum">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">三級金字塔課程體系</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    我們的綜合課程體系適應處於職業發展不同階段的學習者，
+                    結構化為包含基礎、專業和項目實訓模塊的漸進式金字塔。
+                </p>
+            </div>
+            
+            <!-- Curriculum Pyramid Visual -->
+            <div class="relative mb-20">
+                <div class="flex flex-col items-center space-y-8">
+                    <!-- Project Training (Top) -->
+                    <div class="card p-8 max-w-md text-center cyber-border animate-fade-in">
+                        <div class="certification-level level-expert">項目實訓模塊</div>
+                        <h3 class="text-2xl font-bold mb-4">大師級別</h3>
+                        <p class="text-gray-300 mb-4">
+                            將所學知識和技能整合應用於實際項目的實踐經驗
+                        </p>
+                        <div class="flex justify-center space-x-4 text-sm">
+                            <span class="bg-gray-700 px-3 py-1 rounded">創意實驗室</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded">產業項目</span>
+                            <span class="bg-gray-700 px-3 py-1 rounded">畢業項目</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Professional Module (Middle) -->
+                    <div class="card p-8 max-w-2xl text-center animate-fade-in" style="animation-delay: 0.3s;">
+                        <div class="certification-level level-professional">專業模塊</div>
+                        <h3 class="text-2xl font-bold mb-4">專業化課程</h3>
+                        <p class="text-gray-300 mb-6">
+                            涵蓋七大領域的144門專業課程，支持68個專業認證方向
+                        </p>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+                            <div class="bg-gray-700 p-3 rounded">
+                                <div class="font-bold text-blue-400">創作核心</div>
+                                <div class="text-xs">16個方向</div>
+                            </div>
+                            <div class="bg-gray-700 p-3 rounded">
+                                <div class="font-bold text-purple-400">技術實現</div>
+                                <div class="text-xs">8個方向</div>
+                            </div>
+                            <div class="bg-gray-700 p-3 rounded">
+                                <div class="font-bold text-green-400">融合創新</div>
+                                <div class="text-xs">16個方向</div>
+                            </div>
+                            <div class="bg-gray-700 p-3 rounded">
+                                <div class="font-bold text-yellow-400">商業管理</div>
+                                <div class="text-xs">10個方向</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Foundation Module (Base) -->
+                    <div class="card p-8 max-w-4xl text-center animate-fade-in" style="animation-delay: 0.6s;">
+                        <div class="certification-level level-basic">基礎模塊</div>
+                        <h3 class="text-2xl font-bold mb-4">基礎知識體系</h3>
+                        <p class="text-gray-300 mb-6">
+                            AI技術、影視基礎和跨學科基本知識的綜合基礎
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                            <div class="bg-gray-700 p-4 rounded">
+                                <div class="font-bold text-blue-400 mb-2">AI技術基礎</div>
+                                <ul class="text-left space-y-1 text-xs">
+                                    <li>• 人工智能概論</li>
+                                    <li>• 機器學習基礎</li>
+                                    <li>• 深度學習入門</li>
+                                    <li>• 計算機視覺基礎</li>
+                                    <li>• 生成式AI原理</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded">
+                                <div class="font-bold text-purple-400 mb-2">影視基礎知識</div>
+                                <ul class="text-left space-y-1 text-xs">
+                                    <li>• 電影語言與語法</li>
+                                    <li>• 影視敘事原理</li>
+                                    <li>• 視聽語言</li>
+                                    <li>• 影視美學</li>
+                                    <li>• 電影製作基礎</li>
+                                </ul>
+                            </div>
+                            <div class="bg-gray-700 p-4 rounded">
+                                <div class="font-bold text-green-400 mb-2">交叉學科基礎</div>
+                                <ul class="text-left space-y-1 text-xs">
+                                    <li>• 數位媒體技術</li>
+                                    <li>• 創意設計思維</li>
+                                    <li>• 區塊鏈和Web3入門</li>
+                                    <li>• 數位倫理與法律</li>
+                                    <li>• 媒體心理學</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Featured Professional Tracks -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold mb-8 text-center">精選專業課程</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- AI Director -->
+                    <div class="course-card card p-6">
+                        <div class="certification-level level-professional">專業課程</div>
+                        <h4 class="text-xl font-bold mb-3">AI導演</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            掌握AI輔助導演工作流程、視覺風格控制和虛擬演員指導
+                        </p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm text-gray-400">180 小時</span>
+                            <span class="text-lg font-bold text-green-400">¥25,000</span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>AI增強導演技術</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>虛擬製作管理</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>數位演員指導</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Prompt Engineer -->
+                    <div class="course-card card p-6">
+                        <div class="certification-level level-professional">專業課程</div>
+                        <h4 class="text-xl font-bold mb-3">AI提示工程師</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            掌握提示工程、視覺提示工程和跨模態協同專業技能
+                        </p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm text-gray-400">140 小時</span>
+                            <span class="text-lg font-bold text-green-400">¥22,000</span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>高級提示工程</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>視覺提示優化</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>多模態AI協調</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AI Screenwriter -->
+                    <div class="course-card card p-6">
+                        <div class="certification-level level-professional">專業課程</div>
+                        <h4 class="text-xl font-bold mb-3">AI編劇</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            掌握AI輔助劇本創作、角色設計和多模態內容創作
+                        </p>
+                        <div class="flex justify-between items-center mb-4">
+                            <span class="text-sm text-gray-400">160 小時</span>
+                            <span class="text-lg font-bold text-green-400">¥24,000</span>
+                        </div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>AI輔助編劇</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>AI角色開發</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>敘事結構設計</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preparatory Courses -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold mb-8 text-center">快速入門預備課程</h3>
+                <p class="text-center text-gray-300 mb-8">
+                    專為絕對初學者設計，專注於快速技能獲取和即時商業應用
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="card p-6 text-center">
+                        <div class="certification-level level-basic">15 小時</div>
+                        <h4 class="text-lg font-bold mb-3">海外爆款AI兒童故事</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            一鍵生成多語言有聲繪本，專攻海外市場
+                        </p>
+                        <div class="text-center mb-4">
+                            <span class="text-sm text-gray-400 line-through">¥1,299</span>
+                            <span class="text-2xl font-bold text-green-400 ml-2">¥499</span>
+                        </div>
+                        <a href="#apply" class="btn-education px-6 py-2 rounded-full font-medium text-sm w-full block text-center">
+                            立即報名
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 text-center">
+                        <div class="certification-level level-basic">15 小時</div>
+                        <h4 class="text-lg font-bold mb-3">無需出境的AI環球旅拍</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            足不出戶，使用AI技術創作全球旅行影片
+                        </p>
+                        <div class="text-center mb-4">
+                            <span class="text-sm text-gray-400 line-through">¥1,499</span>
+                            <span class="text-2xl font-bold text-green-400 ml-2">¥599</span>
+                        </div>
+                        <a href="#apply" class="btn-education px-6 py-2 rounded-full font-medium text-sm w-full block text-center">
+                            立即報名
+                        </a>
+                    </div>
+                    
+                    <div class="card p-6 text-center">
+                        <div class="certification-level level-basic">15 小時</div>
+                        <h4 class="text-lg font-bold mb-3">AI音樂MV爆款秘訣</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            一鍵生成百萬播放量的音樂影片製作技巧
+                        </p>
+                        <div class="text-center mb-4">
+                            <span class="text-sm text-gray-400 line-through">¥1,699</span>
+                            <span class="text-2xl font-bold text-green-400 ml-2">¥699</span>
+                        </div>
+                        <a href="#apply" class="btn-education px-6 py-2 rounded-full font-medium text-sm w-full block text-center">
+                            立即報名
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Educational Ecosystem -->
+    <section class="py-20 bg-gray-900 bg-opacity-50" id="ecosystem">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">革命性教育生態系統</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    HKAIFA的創新教育生態系統由五大核心組件構成，
+                    創造由前沿技術驅動的無與倫比的學習體驗。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Digital Teacher System -->
+                <div class="ecosystem-component">
+                    <div class="w-20 h-20 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-robot text-3xl text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">數位教師系統</h3>
+                    <p class="text-gray-300 mb-6">
+                        先進的AI驅動自適應學習，提供個性化內容交付、
+                        多模態互動和實時反饋循環。
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="token-feature">
+                            <i class="fas fa-brain mr-2 text-blue-400"></i>
+                            自適應個性化學習
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-comments mr-2 text-blue-400"></i>
+                            多模態互動教學
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-globe mr-2 text-blue-400"></i>
+                            跨語言跨文化教學
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Knowledge Graph -->
+                <div class="ecosystem-component">
+                    <div class="w-20 h-20 rounded-full bg-purple-500 bg-opacity-20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-project-diagram text-3xl text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">知識圖譜生態系統</h3>
+                    <p class="text-gray-300 mb-6">
+                        動態、相互連接的信息網絡，隨行業發展和
+                        學生貢獻持續演變。
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="token-feature">
+                            <i class="fas fa-database mr-2 text-purple-400"></i>
+                            動態更新的行業知識庫
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-sitemap mr-2 text-purple-400"></i>
+                            多維度關聯知識系統
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-users mr-2 text-purple-400"></i>
+                            社區共建共享
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Learning Engine -->
+                <div class="ecosystem-component">
+                    <div class="w-20 h-20 rounded-full bg-green-500 bg-opacity-20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-cogs text-3xl text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">AI學習引擎系統</h3>
+                    <p class="text-gray-300 mb-6">
+                        複雜算法通過診斷評估、微學習設計和
+                        項目驅動體驗優化學習成果。
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="token-feature">
+                            <i class="fas fa-chart-line mr-2 text-green-400"></i>
+                            AI診斷評估
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-cubes mr-2 text-green-400"></i>
+                            微學習單元設計
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-compass mr-2 text-green-400"></i>
+                            興趣引導探索
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Mixed Reality Spaces -->
+                <div class="ecosystem-component">
+                    <div class="w-20 h-20 rounded-full bg-yellow-500 bg-opacity-20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-vr-cardboard text-3xl text-yellow-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">混合現實學習空間</h3>
+                    <p class="text-gray-300 mb-6">
+                        沉浸式VR/AR環境，將傳統教育與
+                        前沿虛擬製作技術無縫融合。
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="token-feature">
+                            <i class="fas fa-cube mr-2 text-yellow-400"></i>
+                            VR沉浸式教室
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-eye mr-2 text-yellow-400"></i>
+                            AR輔助實踐
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-user-astronaut mr-2 text-yellow-400"></i>
+                            數位分身教學
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Industry Connection -->
+                <div class="ecosystem-component">
+                    <div class="w-20 h-20 rounded-full bg-red-500 bg-opacity-20 flex items-center justify-center mx-auto mb-6">
+                        <i class="fas fa-handshake text-3xl text-red-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-4">產業連接平台</h3>
+                    <p class="text-gray-300 mb-6">
+                        學術學習與專業實踐之間的直接橋樑，
+                        通過真實項目和行業合作夥伴關係。
+                    </p>
+                    <div class="space-y-2 text-sm">
+                        <div class="token-feature">
+                            <i class="fas fa-tasks mr-2 text-red-400"></i>
+                            真實項目對接
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-rocket mr-2 text-red-400"></i>
+                            創業孵化支持
+                        </div>
+                        <div class="token-feature">
+                            <i class="fas fa-briefcase mr-2 text-red-400"></i>
+                            直接就業通道
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tokenomics Section -->
+    <section class="py-20 relative" id="tokenomics">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">創新雙代幣經濟模型</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    HKAIFA實施革命性的雙代幣系統，將無形知識轉化為
+                    可量化的數位資產，為知識創造者和投資者建立直接的價值連接。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+                <!-- AIF Token -->
+                <div class="card cyber-border p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mr-4">
+                            <i class="fas fa-coins text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">AIF 平台代幣</h3>
+                            <p class="text-gray-400">生態系統基礎代幣</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 mb-6">
+                        HKAIFA生態系統的基礎，提供治理權、經濟收益，
+                        以及從所有平台活動中獲取價值。
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="token-feature">
+                            <i class="fas fa-vote-yea mr-3 text-blue-400"></i>
+                            <div>
+                                <div class="font-medium">治理權益</div>
+                                <div class="text-sm text-gray-400">對平台升級和關鍵參數進行投票</div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-coins mr-3 text-blue-400"></i>
+                            <div>
+                                <div class="font-medium">經濟收益</div>
+                                <div class="text-sm text-gray-400">獲得平台總收入的一部分</div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-key mr-3 text-blue-400"></i>
+                            <div>
+                                <div class="font-medium">優先訪問</div>
+                                <div class="text-sm text-gray-400">提早獲得高級教育資源</div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-percentage mr-3 text-blue-400"></i>
+                            <div>
+                                <div class="font-medium">費用折扣</div>
+                                <div class="text-sm text-gray-400">根據持有量減少平台費用</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- ACA Token Series -->
+                <div class="card cyber-border p-8">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mr-4">
+                            <i class="fas fa-graduation-cap text-2xl text-white"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold">ACA 代幣系列</h3>
+                            <p class="text-gray-400">教育內容代幣</p>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-300 mb-6">
+                        項目特定代幣，代表個別教育內容及其未來收入流的所有權。
+                        每個ACA代幣代表特定的知識資產。
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="token-feature">
+                            <i class="fas fa-coins mr-3 text-purple-400"></i>
+                            <div>
+                                <div class="font-medium">收益權利</div>
+                                <div class="text-sm text-gray-400">根據代幣比例自動分配</div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-rocket mr-3 text-purple-400"></i>
+                            <div>
+                                <div class="font-medium">融資工具</div>
+                                <div class="text-sm text-gray-400">課程開發的預先融資</div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-exchange-alt mr-3 text-purple-400"></i>
+                            <div>
+                                <div class="font-medium">二級市場</div>
+                                <div class="text-sm text-gray-400">在平台內自由交易</div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-award mr-3 text-purple-400"></i>
+                            <div>
+                                <div class="font-medium">開放發行</div>
+                                <div class="text-sm text-gray-400">大學、機構和創作者可發行代幣</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Token Operation Process -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold mb-8 text-center">開放式代幣運作流程</h3>
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-blue-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold">1</span>
+                        </div>
+                        <h4 class="font-bold mb-2">代幣發行申請</h4>
+                        <p class="text-sm text-gray-300">教育內容提供者提交ACA代幣發行申請</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-purple-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold">2</span>
+                        </div>
+                        <h4 class="font-bold mb-2">內容評估</h4>
+                        <p class="text-sm text-gray-300">專業委員會評估課程價值和可行性</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-green-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold">3</span>
+                        </div>
+                        <h4 class="font-bold mb-2">融資階段</h4>
+                        <p class="text-sm text-gray-300">向投資者和學習者銷售代幣，募集開發資金</p>
+                    </div>
+                    
+                    <div class="text-center">
+                        <div class="w-16 h-16 rounded-full bg-yellow-500 flex items-center justify-center mx-auto mb-4">
+                            <span class="text-2xl font-bold">4</span>
+                        </div>
+                        <h4 class="font-bold mb-2">收益分配</h4>
+                        <p class="text-sm text-gray-300">通過智能合約自動分配收益</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Global Centers Section -->
+    <section class="py-20 bg-gray-900 bg-opacity-50" id="global">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">全球合作中心戰略</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    HKAIFA雄心勃勃的計劃，到2030年在全球建立100個合作中心，
+                    每年培訓超過5萬名AI影視專業人才，以解決全球關鍵的人才短缺問題。
+                </p>
+            </div>
+            
+            <!-- Expansion Timeline -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold mb-8 text-center">分階段全球擴張</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Phase 1 -->
+                    <div class="card p-6 text-center">
+                        <div class="certification-level level-basic">2025-2026</div>
+                        <h4 class="text-xl font-bold mb-4">第一階段：基礎建立</h4>
+                        <div class="space-y-3 text-sm text-left">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>在5個大洲啟動15個試點合作中心</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>在第一年運營中培訓5,000名學生</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>與25所領先教育機構建立夥伴關係</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-green-400 mr-2"></i>
+                                <span>為10個主要市場開發本地化課程</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 2 -->
+                    <div class="card p-6 text-center">
+                        <div class="certification-level level-professional">2027-2028</div>
+                        <h4 class="text-xl font-bold mb-4">第二階段：戰略擴張</h4>
+                        <div class="space-y-3 text-sm text-left">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-blue-400 mr-2"></i>
+                                <span>擴展到20個國家的50個中心</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-blue-400 mr-2"></i>
+                                <span>實現年培訓2萬名學生的能力</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-blue-400 mr-2"></i>
+                                <span>啟動完全在線和混合學習項目</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-blue-400 mr-2"></i>
+                                <span>在關鍵市場建立區域卓越中心</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Phase 3 -->
+                    <div class="card p-6 text-center">
+                        <div class="certification-level level-expert">2029-2030</div>
+                        <h4 class="text-xl font-bold mb-4">第三階段：全球領導地位</h4>
+                        <div class="space-y-3 text-sm text-left">
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-purple-400 mr-2"></i>
+                                <span>在全球運營100個中心</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-purple-400 mr-2"></i>
+                                <span>每年培訓超過5萬名學生</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-purple-400 mr-2"></i>
+                                <span>建立AI影視教育的全球標準</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-check text-purple-400 mr-2"></i>
+                                <span>創建自我維持的區域生態系統</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Three-Tier Cooperation Model -->
+            <div class="mb-20">
+                <h3 class="text-2xl font-bold mb-8 text-center">三級合作模式</h3>
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Innovation Centers -->
+                    <div class="card p-6">
+                        <div class="certification-level level-expert">創新中心</div>
+                        <h4 class="text-xl font-bold mb-4">大型綜合性基地</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            位於洛杉磯、倫敦、東京和新加坡等主要全球城市的先進設施。
+                        </p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-building mr-2 text-blue-400"></i>
+                                <span>10,000+ 平方米</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2 text-blue-400"></i>
+                                <span>2,000-3,000 學生/年</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-dollar-sign mr-2 text-blue-400"></i>
+                                <span>年度預算1,500-2,500萬美元</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap mr-2 text-blue-400"></i>
+                                <span>全部68個專業方向</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-blue-900 bg-opacity-30 rounded">
+                            <div class="text-xs text-gray-300">
+                                <strong>授權費：</strong> ¥100萬/年<br>
+                                <strong>學費留存：</strong> 線上50%，線下30%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Flagship Centers -->
+                    <div class="card p-6">
+                        <div class="certification-level level-professional">旗艦中心</div>
+                        <h4 class="text-xl font-bold mb-4">區域性教育中心</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            服務多個國家的區域樞紐，提供核心HKAIFA項目，適應當地市場需求。
+                        </p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-building mr-2 text-purple-400"></i>
+                                <span>5,000+ 平方米</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2 text-purple-400"></i>
+                                <span>1,000-1,500 學生/年</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-dollar-sign mr-2 text-purple-400"></i>
+                                <span>年度預算800-1,500萬美元</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap mr-2 text-purple-400"></i>
+                                <span>25-35個認證途徑</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-purple-900 bg-opacity-30 rounded">
+                            <div class="text-xs text-gray-300">
+                                <strong>授權費：</strong> ¥50萬/年<br>
+                                <strong>學費留存：</strong> 線上45%，線下30%
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Standard Centers -->
+                    <div class="card p-6">
+                        <div class="certification-level level-basic">標準中心</div>
+                        <h4 class="text-xl font-bold mb-4">本地化教育基地</h4>
+                        <p class="text-gray-300 text-sm mb-4">
+                            提供適應特定區域需求和資源的基本AI影視培訓的當地中心。
+                        </p>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center">
+                                <i class="fas fa-building mr-2 text-green-400"></i>
+                                <span>2,000+ 平方米</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-users mr-2 text-green-400"></i>
+                                <span>500-800 學生/年</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-dollar-sign mr-2 text-green-400"></i>
+                                <span>年度預算300-800萬美元</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap mr-2 text-green-400"></i>
+                                <span>15-20個認證途徑</span>
+                            </div>
+                        </div>
+                        <div class="mt-4 p-3 bg-green-900 bg-opacity-30 rounded">
+                            <div class="text-xs text-gray-300">
+                                <strong>授權費：</strong> ¥30萬/年<br>
+                                <strong>學費留存：</strong> 40%
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blockchain Certification -->
+    <section class="py-20" id="certification">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">基於區塊鏈的認證體系</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    HKAIFA利用區塊鏈技術創建防篡改、全面且可驗證的
+                    教育證書，為專業認證建立新標準。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 mb-20">
+                <div class="animate-slide-right">
+                    <h3 class="text-2xl font-bold mb-6">四級認證框架</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="card p-6">
+                            <div class="certification-level level-basic">第一級</div>
+                            <h4 class="text-lg font-bold mb-2">技能模塊認證</h4>
+                            <p class="text-gray-300 text-sm">
+                                單一技能點的微認證，具有細粒度驗證
+                                和可疊加證書組件，實現快速獲取。
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="certification-level level-professional">第二級</div>
+                            <h4 class="text-lg font-bold mb-2">專業方向認證</h4>
+                            <p class="text-gray-300 text-sm">
+                                特定專業領域的綜合認證，具有
+                                行業驗證標準和職業導向資格。
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="certification-level level-advanced">第三級</div>
+                            <h4 class="text-lg font-bold mb-2">項目能力認證</h4>
+                            <p class="text-gray-300 text-sm">
+                                基於作品集的評估，具有實際應用展示
+                                和客戶/導師驗證組件。
+                            </p>
+                        </div>
+                        
+                        <div class="card p-6">
+                            <div class="certification-level level-expert">第四級</div>
+                            <h4 class="text-lg font-bold mb-2">行業專家認證</h4>
+                            <p class="text-gray-300 text-sm">
+                                由行業專家評審的高級認證，具有綜合
+                                專業精通驗證和同行認可。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="animate-fade-in">
+                    <h3 class="text-2xl font-bold mb-6">區塊鏈學歷證書特性</h3>
+                    
+                    <div class="space-y-6">
+                        <div class="token-feature">
+                            <i class="fas fa-shield-alt mr-3 text-blue-400"></i>
+                            <div>
+                                <div class="font-medium">不可篡改的技能證明</div>
+                                <div class="text-sm text-gray-400">
+                                    區塊鏈記錄確保真實性與加密驗證
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-chart-pie mr-3 text-purple-400"></i>
+                            <div>
+                                <div class="font-medium">詳細的技能構成</div>
+                                <div class="text-sm text-gray-400">
+                                    精細化技能畫像與具體能力水平
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-folder-open mr-3 text-green-400"></i>
+                            <div>
+                                <div class="font-medium">實際項目記錄</div>
+                                <div class="text-sm text-gray-400">
+                                    作品集上鏈永久保存與項目貢獻驗證
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-award mr-3 text-yellow-400"></i>
+                            <div>
+                                <div class="font-medium">行業認可信息</div>
+                                <div class="text-sm text-gray-400">
+                                    全球化的認證互認網絡與專家背書
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="token-feature">
+                            <i class="fas fa-sync mr-3 text-red-400"></i>
+                            <div>
+                                <div class="font-medium">持續學習記錄</div>
+                                <div class="text-sm text-gray-400">
+                                    終身學習檔案與技能時效性指標
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-8 p-6 bg-gray-800 rounded-lg">
+                        <h4 class="font-bold mb-3">智能就業匹配</h4>
+                        <p class="text-sm text-gray-300 mb-4">
+                            我們的AI驅動系統在認證人才和行業機會之間創建高效連接。
+                        </p>
+                        <div class="grid grid-cols-2 gap-4 text-xs">
+                            <div>✓ 精準職位匹配</div>
+                            <div>✓ 智能合約工作委託</div>
+                            <div>✓ 去中心化工作評價</div>
+                            <div>✓ 動態技能培訓對接</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor System -->
+    <section class="py-20 bg-gray-900 bg-opacity-50" id="instructors">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">講師認證與管理體系</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    HKAIFA實施全面的講師認證系統，確保教學質量，
+                    同時提供公平的補償和職業發展機會。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-4 gap-8">
+                <!-- Certified Instructor -->
+                <div class="card p-6 text-center">
+                    <div class="certification-level level-basic">入門級</div>
+                    <h4 class="text-lg font-bold mb-3">認證講師</h4>
+                    <div class="text-2xl font-bold text-green-400 mb-2">¥5,000</div>
+                    <div class="text-sm text-gray-400 mb-4">認證費</div>
+                    
+                    <div class="space-y-2 text-sm text-left mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>在線理論測評</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>教學能力評估</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-percentage text-blue-400 mr-2"></i>
+                            <span>3% 績效獎勵</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-xs text-gray-400 bg-gray-800 p-3 rounded">
+                        可受聘講授行業人才認證課程及預備認證課程
+                    </div>
+                </div>
+                
+                <!-- Senior Instructor -->
+                <div class="card p-6 text-center">
+                    <div class="certification-level level-professional">專業級</div>
+                    <h4 class="text-lg font-bold mb-3">高級講師</h4>
+                    <div class="text-2xl font-bold text-green-400 mb-2">¥8,000</div>
+                    <div class="text-sm text-gray-400 mb-4">認證費</div>
+                    
+                    <div class="space-y-2 text-sm text-left mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>理論 + 教學 + 經驗</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>行業經驗認證</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-percentage text-blue-400 mr-2"></i>
+                            <span>5% 績效獎勵</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-xs text-gray-400 bg-gray-800 p-3 rounded">
+                        可受聘講授職業人才認證課程和高級項目
+                    </div>
+                </div>
+                
+                <!-- Gold Instructor -->
+                <div class="card p-6 text-center border-2 border-yellow-500">
+                    <div class="certification-level level-advanced">專家級</div>
+                    <h4 class="text-lg font-bold mb-3">金牌講師</h4>
+                    <div class="text-2xl font-bold text-green-400 mb-2">¥12,000</div>
+                    <div class="text-sm text-gray-400 mb-4">認證費</div>
+                    
+                    <div class="space-y-2 text-sm text-left mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>專家委員會面試</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>全面評估流程</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-percentage text-yellow-400 mr-2"></i>
+                            <span>10% 績效獎勵</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-xs text-gray-400 bg-gray-800 p-3 rounded">
+                        可受聘講授學院所有課程包括大師班
+                    </div>
+                </div>
+                
+                <!-- Specific Skill Certification -->
+                <div class="card p-6 text-center">
+                    <div class="certification-level level-basic">專項</div>
+                    <h4 class="text-lg font-bold mb-3">技能認證</h4>
+                    <div class="text-2xl font-bold text-green-400 mb-2">¥2,000</div>
+                    <div class="text-sm text-gray-400 mb-4">每項技能模塊</div>
+                    
+                    <div class="space-y-2 text-sm text-left mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>40個專業方向</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>特定技能專注</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-tools text-blue-400 mr-2"></i>
+                            <span>高級以上級別必需</span>
+                        </div>
+                    </div>
+                    
+                    <div class="text-xs text-gray-400 bg-gray-800 p-3 rounded">
+                        針對特定專業方向的專項認證
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20" id="pricing">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title center">綜合收費標準</h2>
+                <p class="text-xl text-gray-300 max-w-4xl mx-auto">
+                    靈活定價反映教育價值，同時保持對不同全球市場的可及性。
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20">
+                <!-- Industry Talent Certification -->
+                <div class="pricing-card card p-8 text-center">
+                    <div class="certification-level level-basic">基礎</div>
+                    <h3 class="text-2xl font-bold mb-4">行業人才認證</h3>
+                    <div class="text-4xl font-bold text-green-400 mb-2">¥12,000</div>
+                    <div class="text-sm text-gray-400 mb-6">120 學時 / 3 個月</div>
+                    
+                    <div class="space-y-3 text-sm text-left mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>在線學習平台訪問</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>線下研討會和工作坊</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>評估和評價</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>結業認證</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#apply" class="btn-primary px-6 py-3 rounded-full font-medium w-full block text-center">
+                        立即報名
+                    </a>
+                </div>
+                
+                <!-- Professional Tracks -->
+                <div class="pricing-card featured card p-8 text-center">
+                    <div class="certification-level level-professional">專業</div>
+                    <h3 class="text-2xl font-bold mb-4">職業人才認證</h3>
+                    <div class="text-4xl font-bold text-green-400 mb-2">¥22,000-25,000</div>
+                    <div class="text-sm text-gray-400 mb-6">140-200 學時 / 4-6 個月</div>
+                    
+                    <div class="space-y-3 text-sm text-left mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>專業化職業方向</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>行業標準課程</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>真實項目經驗</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>職業安置支持</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>區塊鏈認證</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#apply" class="btn-education px-6 py-3 rounded-full font-medium w-full block text-center">
+                        選擇方向
+                    </a>
+                </div>
+                
+                <!-- Master Classes -->
+                <div class="pricing-card card p-8 text-center">
+                    <div class="certification-level level-expert">大師級</div>
+                    <h3 class="text-2xl font-bold mb-4">國際大師班</h3>
+                    <div class="text-4xl font-bold text-green-400 mb-2">¥100,000</div>
+                    <div class="text-sm text-gray-400 mb-6">每期課程</div>
+                    
+                    <div class="space-y-3 text-sm text-left mb-8">
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>國際頂尖AI影視專家</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>前沿行業洞察</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>獨家網絡機會</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-check text-green-400 mr-2"></i>
+                            <span>高級認證</span>
+                        </div>
+                    </div>
+                    
+                    <a href="#apply" class="btn-secondary px-6 py-3 rounded-full font-medium w-full block text-center">
+                        預訂席位
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Project Classes -->
+            <div class="card p-8 mb-20">
+                <div class="text-center mb-8">
+                    <h3 class="text-2xl font-bold mb-4">實戰項目班</h3>
+                    <p class="text-gray-300">
+                        真實AI影視項目，學員全程參與策劃、製作、宣發等環節
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-6 bg-gray-800 rounded-lg">
+                        <h4 class="text-lg font-bold mb-2">小型項目</h4>
+                        <div class="text-2xl font-bold text-green-400 mb-2">¥20萬-30萬</div>
+                        <div class="text-sm text-gray-400 mb-4">1-3個月 | 5-10人</div>
+                        <div class="text-xs text-gray-300">
+                            短片、宣傳片和數位內容創作項目
+                        </div>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-gray-800 rounded-lg">
+                        <h4 class="text-lg font-bold mb-2">中型項目</h4>
+                        <div class="text-2xl font-bold text-green-400 mb-2">¥30萬-60萬</div>
+                        <div class="text-sm text-gray-400 mb-4">3-6個月 | 10-20人</div>
+                        <div class="text-xs text-gray-300">
+                            紀錄片系列、商業廣告和中型製作
+                        </div>
+                    </div>
+                    
+                    <div class="text-center p-6 bg-gray-800 rounded-lg">
+                        <h4 class="text-lg font-bold mb-2">大型項目</h4>
+                        <div class="text-2xl font-bold text-green-400 mb-2">¥60萬-100萬</div>
+                        <div class="text-sm text-gray-400 mb-4">6-12個月 | 20-30人</div>
+                        <div class="text-xs text-gray-300">
+                            劇情片、系列製作和綜合媒體活動
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apply Section -->
+    <section class="py-24 relative" id="apply">
+        <div class="absolute inset-0 bg-gradient-to-r from-blue-900 to-purple-900 opacity-80"></div>
+        <div class="container mx-auto px-4 relative z-10">
+            <div class="max-w-4xl mx-auto text-center">
+                <h2 class="text-3xl md:text-5xl font-bold mb-6">塑造AI電影的未來</h2>
+                <p class="text-xl text-gray-200 mb-8">
+                    加入HKAIFA，成為AI影視教育全球革命的一部分。無論你是開始
+                    你的旅程還是提升你的職業，我們都有完美的項目適合你。
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                    <div class="card p-8 apply-card">
+                        <h3 class="text-2xl font-bold mb-4">學生申請</h3>
+                        <p class="text-gray-300 mb-6">
+                            在AI電影製作中開始你的旅程，提供為所有技能水平設計的綜合課程。
+                        </p>
+                        <div class="space-y-3 text-sm text-left mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-graduation-cap text-blue-400 mr-2"></i>
+                                <span>144門專業課程可選</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-certificate text-blue-400 mr-2"></i>
+                                <span>68個職業認證方向</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-briefcase text-blue-400 mr-2"></i>
+                                <span>直接行業安置支持</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-coins text-blue-400 mr-2"></i>
+                                <span>區塊鏈驗證證書</span>
+                            </div>
+                        </div>
+                        <a href="#student-application" class="btn-education px-8 py-3 rounded-full font-medium w-full block text-center">
+                            學生申請
+                        </a>
+                    </div>
+                    
+                    <div class="card p-8 apply-card">
+                        <h3 class="text-2xl font-bold mb-4">講師申請</h3>
+                        <p class="text-gray-300 mb-6">
+                            分享你的專業知識，加入我們全球AI影視教育先鋒網絡。
+                        </p>
+                        <div class="space-y-3 text-sm text-left mb-6">
+                            <div class="flex items-center">
+                                <i class="fas fa-chalkboard-teacher text-purple-400 mr-2"></i>
+                                <span>四級講師認證體系</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-percentage text-purple-400 mr-2"></i>
+                                <span>3-10% 績效獎勵</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-globe text-purple-400 mr-2"></i>
+                                <span>全球教學機會</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-trophy text-purple-400 mr-2"></i>
+                                <span>專業認可與成長</span>
+                            </div>
+                        </div>
+                        <a href="#instructor-application" class="btn-primary px-8 py-3 rounded-full font-medium w-full block text-center">
+                            講師申請
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="card p-8 mb-12">
+                    <h3 class="text-2xl font-bold mb-6">合作夥伴機會</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-green-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-university text-2xl text-green-400"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">教育機構</h4>
+                            <p class="text-sm text-gray-300">
+                                與HKAIFA合作建立合作中心，擴展你的AI教育項目。
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-yellow-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-building text-2xl text-yellow-400"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">行業夥伴</h4>
+                            <p class="text-sm text-gray-300">
+                                在課程開發、提供真實項目和獲得我們的人才管道方面合作。
+                            </p>
+                        </div>
+                        
+                        <div class="text-center">
+                            <div class="w-16 h-16 rounded-full bg-blue-500 bg-opacity-20 flex items-center justify-center mx-auto mb-4">
+                                <i class="fas fa-coins text-2xl text-blue-400"></i>
+                            </div>
+                            <h4 class="text-lg font-bold mb-2">代幣投資者</h4>
+                            <p class="text-sm text-gray-300">
+                                通過我們創新的AIF和ACA代幣生態系統投資教育未來。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center">
+                    <p class="text-lg text-gray-200 mb-6">
+                        準備成為AI影視革命的一部分？今天就聯繫我們，了解更多機會。
+                    </p>
+                    <a href="mailto:admissions@aif.college" class="btn-secondary px-8 py-3 rounded-full font-medium mr-4">
+                        聯繫招生辦
+                    </a>
+                    <a href="#whitepaper" class="btn-primary px-8 py-3 rounded-full font-medium">
+                        下載白皮書
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-gray-900">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <a href="#" class="flex flex-col items-start mb-4">
+                        <div class="logo-font text-2xl">HKAIFA</div>
+                        <div class="logo-sub text-xs">香港AI電影學院</div>
+                    </a>
+                    <p class="text-gray-400 mb-4">
+                        全球首個AI原生影視教育機構，連接技術與創意，
+                        塑造電影的未來。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-telegram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-blue-400"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">教育</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#curriculum" class="text-gray-400 hover:text-white">課程體系</a></li>
+                        <li><a href="#certification" class="text-gray-400 hover:text-white">認證體系</a></li>
+                        <li><a href="#pricing" class="text-gray-400 hover:text-white">收費標準</a></li>
+                        <li><a href="#instructors" class="text-gray-400 hover:text-white">成為講師</a></li>
+                        <li><a href="#apply" class="text-gray-400 hover:text-white">立即申請</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">技術</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#ecosystem" class="text-gray-400 hover:text-white">教育生態系統</a></li>
+                        <li><a href="#tokenomics" class="text-gray-400 hover:text-white">代幣經濟</a></li>
+                        <li><a href="#blockchain" class="text-gray-400 hover:text-white">區塊鏈整合</a></li>
+                        <li><a href="#ai-technology" class="text-gray-400 hover:text-white">AI技術</a></li>
+                        <li><a href="#whitepaper" class="text-gray-400 hover:text-white">白皮書</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">全球網絡</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#global" class="text-gray-400 hover:text-white">全球中心</a></li>
+                        <li><a href="#partnerships" class="text-gray-400 hover:text-white">合作夥伴</a></li>
+                        <li><a href="#community" class="text-gray-400 hover:text-white">社區</a></li>
+                        <li><a href="#events" class="text-gray-400 hover:text-white">活動</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-white">聯繫我們</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="text-center text-gray-500 text-sm mb-4 md:mb-0">
+                        <p>© 2025 香港AI電影學院。保留所有權利。</p>
+                    </div>
+                    <div class="flex space-x-4 text-sm">
+                        <a href="#terms" class="text-gray-400 hover:text-white">服務條款</a>
+                        <a href="#privacy" class="text-gray-400 hover:text-white">隱私政策</a>
+                        <a href="#legal" class="text-gray-400 hover:text-white">法律聲明</a>
+                    </div>
+                </div>
+                
+                <div class="mt-6 text-center">
+                    <div class="inline-flex items-center space-x-4 text-sm text-gray-400">
+                        <span>聯繫信息：</span>
+                        <span>📧 admissions@aif.college</span>
+                        <span>🌐 www.aif.college</span>
+                        <span>📍 香港特別行政區</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Add random data streams
+        function createDataStreams() {
+            for (let i = 0; i < 5; i++) {
+                setTimeout(() => {
+                    const stream = document.createElement('div');
+                    stream.className = 'data-stream';
+                    stream.style.left = Math.random() * 100 + '%';
+                    stream.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(stream);
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        stream.remove();
+                    }, 4000);
+                }, i * 3000);
+            }
+        }
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            // Start data streams
+            createDataStreams();
+            setInterval(createDataStreams, 15000);
+            
+            // Add scroll animations
+            const animatedElements = document.querySelectorAll('.animate-fade-in, .animate-slide-up, .animate-slide-right');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        if (entry.target.classList.contains('animate-slide-up')) {
+                            entry.target.style.transform = 'translateY(0)';
+                        }
+                        if (entry.target.classList.contains('animate-slide-right')) {
+                            entry.target.style.transform = 'translateX(0)';
+                        }
+                        if (entry.target.classList.contains('animate-fade-in')) {
+                            entry.target.style.transform = 'scale(1)';
+                        }
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            animatedElements.forEach(el => {
+                el.style.opacity = '0';
+                if (el.classList.contains('animate-slide-up')) {
+                    el.style.transform = 'translateY(50px)';
+                }
+                if (el.classList.contains('animate-slide-right')) {
+                    el.style.transform = 'translateX(-50px)';
+                }
+                if (el.classList.contains('animate-fade-in')) {
+                    el.style.transform = 'scale(0.95)';
+                }
+                el.style.transition = 'all 0.8s ease-in-out';
+                observer.observe(el);
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mobileMenu = document.querySelector('.mobile-menu');
+            const mobileMenuClose = document.querySelector('.mobile-menu-close');
+            
+            if (mobileMenuBtn && mobileMenu && mobileMenuClose) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.add('open');
+                    document.body.style.overflow = 'hidden';
+                });
+                
+                mobileMenuClose.addEventListener('click', () => {
+                    mobileMenu.classList.remove('open');
+                    document.body.style.overflow = 'auto';
+                });
+                
+                // Close mobile menu when clicking on nav items
+                const mobileNavItems = document.querySelectorAll('.mobile-nav-item');
+                mobileNavItems.forEach(item => {
+                    item.addEventListener('click', () => {
+                        mobileMenu.classList.remove('open');
+                        document.body.style.overflow = 'auto';
+                    });
+                });
+            }
+            
+            // Language selection
+            const languageLinks = document.querySelectorAll('.language-dropdown a');
+            const languageIndicator = document.querySelector('.language-indicator');
+            
+            languageLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const lang = link.getAttribute('data-lang');
+                    const flag = link.querySelector('img').src;
+                    const text = link.textContent.trim();
+                    
+                    // Update language indicator
+                    if (languageIndicator) {
+                        const shortText = text === '繁體中文 (香港)' ? '繁中' : 
+                                         text === '简体中文' ? '简中' : 
+                                         text === 'English' ? 'EN' : 
+                                         text === '日本語' ? 'JA' : text;
+                        languageIndicator.innerHTML = `
+                            <img src="${flag}" alt="${text}">
+                            <span>${shortText}</span>
+                            <i class="fas fa-chevron-down ml-2 text-sm"></i>
+                        `;
+                    }
+                    
+                    // Show translation message
+                    alert(`切換至 ${text} - AI翻譯已啟動`);
+                });
+            });
+            
+            // Smooth scrolling for anchor links
+            const anchorLinks = document.querySelectorAll('a[href^="#"]');
+            anchorLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    const targetElement = document.querySelector(targetId);
+                    
+                    if (targetElement) {
+                        const offsetTop = targetElement.offsetTop - 80; // Account for fixed navbar
+                        window.scrollTo({
+                            top: offsetTop,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Application button handlers
+            const applicationButtons = document.querySelectorAll('[href="#apply"], [href="#student-application"], [href="#instructor-application"]');
+            applicationButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    if (this.getAttribute('href') === '#student-application') {
+                        e.preventDefault();
+                        alert('學生申請入口開啟中...\n\n您將被重新導向至我們的綜合申請表格，您可以：\n\n• 選擇您偏好的項目方向\n• 上傳您的作品集\n• 安排面試\n• 申請獎學金');
+                    } else if (this.getAttribute('href') === '#instructor-application') {
+                        e.preventDefault();
+                        alert('講師申請入口開啟中...\n\n您將被重新導向至我們的講師認證系統，您可以：\n\n• 提交您的證書\n• 參加評估\n• 安排認證面試\n• 加入我們的全球網絡');
+                    }
+                });
+            });
+            
+            // Add dynamic statistics counter animation
+            const statNumbers = document.querySelectorAll('.stats-card .number');
+            const animateNumbers = (entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const target = entry.target;
+                        const text = target.textContent;
+                        
+                        if (!target.dataset.animated) {
+                            target.dataset.animated = 'true';
+                            
+                            if (text.includes('144')) {
+                                let current = 0;
+                                const timer = setInterval(() => {
+                                    current += 3;
+                                    if (current >= 144) {
+                                        current = 144;
+                                        clearInterval(timer);
+                                    }
+                                    target.textContent = current;
+                                }, 30);
+                            } else if (text.includes('68')) {
+                                let current = 0;
+                                const timer = setInterval(() => {
+                                    current += 2;
+                                    if (current >= 68) {
+                                        current = 68;
+                                        clearInterval(timer);
+                                    }
+                                    target.textContent = current;
+                                }, 40);
+                            } else if (text.includes('100')) {
+                                let current = 0;
+                                const timer = setInterval(() => {
+                                    current += 2;
+                                    if (current >= 100) {
+                                        current = 100;
+                                        clearInterval(timer);
+                                    }
+                                    target.textContent = current;
+                                }, 30);
+                            } else if (text.includes('5萬')) {
+                                target.textContent = '5萬+';
+                            }
+                        }
+                    }
+                });
+            };
+            
+            const numberObserver = new IntersectionObserver(animateNumbers, { threshold: 0.5 });
+            statNumbers.forEach(num => numberObserver.observe(num));
+            
+            // Add hover effects for cards
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+            
+            // Email link handler
+            const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
+            emailLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    const email = this.getAttribute('href').replace('mailto:', '');
+                    if (!email) {
+                        e.preventDefault();
+                        alert('電子郵件：admissions@aif.college\n\n請發送您的查詢，我們將在24小時內回覆。');
+                    }
+                });
+            });
+            
+            console.log('HKAIFA 繁體中文網站已初始化 - 準備迎接AI影視教育的未來！');
+        });
+    </script>
+</body>
+</html>
